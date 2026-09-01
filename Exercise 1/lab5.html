@@ -1,1 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>JSON AJAX Lab</title>
+</head>
+<body>
 
+    <h2>Welcome Form</h2>
+
+    <input type="text" id="name" placeholder="Enter your name">
+
+    <button onclick="sendData()">Submit</button>
+
+    <p id="result"></p>
+
+    <script>
+        function sendData() {
+            let name = document.getElementById("name").value;
+
+            fetch("lab5.php", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    name: name
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById("result").innerHTML =
+                    data.message;
+            });
+        }
+    </script>
+
+</body>
+</html>
